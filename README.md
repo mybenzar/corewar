@@ -1,4 +1,4 @@
-Core War is a 1984 programming game in which two or more battle programs (called "warriors") compete for control of a virtual computer. These battle programs are written in an abstract assembly language. 
+Core War is a 1984 programming game in which two or more battle programs (called "champions") compete for control of a virtual computer. These battle programs are written in an abstract assembly language. 
 The goal of the game is to prevent other programs from functionning correctly by any means necessary. 
 We first create a virtual machine in which programs (written by players) fight. The objective of each process is to survive, which means to execute a special instruction "live". The programs run simultaneously in the virtual machine and on the same memory space, they can therefore write on each other. 
 The winner of the game is the last program who ran a "live" instruction. 
