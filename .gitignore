@@ -1,0 +1,8 @@
+#Swap Files
+*.*sw*
+
+#Binary
+corewar
+corewar_db
+asm
+asm_db
