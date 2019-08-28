@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_ld.c                                            :+:      :+:    :+:   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/28 17:37:59 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/28 18:21:41 by mybenzar         ###   ########.fr       */
+/*   Created: 2019/05/15 11:33:50 by mybenzar          #+#    #+#             */
+/*   Updated: 2019/05/15 11:33:52 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "corewar.h"
+#include "libft.h"
 
-/*
-**	--> op_ld : load direct operation (0x02) - loads the first argument in the
-**	register (represented in the second argument). If the first argument is 0,
-**	carry takes the value of 1.
-*/
-
-// structure qui stock les registres ?
-// structure pour carry ? est ce que carry est propre aux joueurs ou au jeu?
-
-int		op_ld(t_corewar *cor, t_arg *arg)
+uintmax_t	ft_power(int n, int power)
 {
-	
+	int res;
+
+	res = 1;
+	if (power == 0)
+		return (1);
+	if (power < 0)
+		return (0);
+	while (power--)
+		res = res * n;
+	return (res);
 }

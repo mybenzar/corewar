@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:05:04 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/28 18:19:40 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/28 18:33:09 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ typedef struct	s_corewar
 	t_list		*list_champion;
 	uint64_t	nb_champion;
 	uint64_t	error;
+	t_register	reg[REG_NUMBER];
+	uint8_t		carry;
 }				t_corewar;
+
+
+typedef	struct  s_register
+{
+	uint8_t		byte[REG_SIZE];
+}				t_register;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 17:44:28 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/28 18:11:07 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/28 19:26:30 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,32 @@
 **	that represent the player's id
 */
 
-// unused variable cor
-
-int		op_live(t_corewar *cor, t_arg *arg)
+int8_t		op_live(t_corewar *cor, t_champion *champ, t_arg *arg)
 {
-	int		id;
-	t_list	*tmp;
+	int64_t		id;
+	int64_t		tmp;
+	int			i;
 
-	tmp = corewar->list_champion;
-	while (tmp != NULL)
+	i = 0;
+	id = 1;
+	tmp = arg.arg1;
+	while (i < 4)
 	{
-		if ()
-		tmp = tmp->next;
+		tmp >>=1;
+		i++;
 	}
-	id = ft_atoi_base(arg.arg1);
+	while (i != 0)
+	{
+		i--;
+		if (tmp & 1)
+			id = id + ft_power(2, i);
+		tmp <<= 1;
+	}
+	if ((size_t)id != champ->real_id)
+	{
+		ft_printf("ERROR: Something is wrong with the player's ID\n");
+		return (FAILURE);
+	}
 	ft_printf("Player %d is alive!\n", id);
 	return (SUCCESS);
 }
