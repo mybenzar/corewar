@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_live.c                                          :+:      :+:    :+:   */
+/*   op_ld.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/27 17:44:28 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/28 18:11:07 by mybenzar         ###   ########.fr       */
+/*   Created: 2019/08/28 17:37:59 by mybenzar          #+#    #+#             */
+/*   Updated: 2019/08/28 17:57:21 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
-#include "ft_printf.h"
+# include "corewar.h"
 
 /*
-**	--> op_live : launches live operation (0x01) that holds on 4 bytes
-**	that represent the player's id
+**	--> op_ld : load direct operation (0x02) - loads the first argument in the
+**	register (represented in the second argument). If the first argument is 0,
+**	carry takes the value of 1.
 */
 
-// unused variable cor
+// structure qui stock les registres ?
+// structure pour carry ? est ce que carry est propre aux joueurs ou au jeu?
 
-int		op_live(t_corewar *cor, t_arg *arg)
+int		op_ld(t_corewar *cor, t_arg *arg)
 {
-	int		id;
-	t_list	*tmp;
-
-	tmp = corewar->list_champion;
-	while (tmp != NULL)
-	{
-		if ()
-		tmp = tmp->next;
-	}
-	id = ft_atoi_base(arg.arg1);
-	ft_printf("Player %d is alive!\n", id);
-	return (SUCCESS);
+	
 }

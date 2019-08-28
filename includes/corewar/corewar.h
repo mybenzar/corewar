@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:05:04 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/28 17:36:09 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/28 18:09:46 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ typedef struct	s_champion
 
 typedef struct	s_arg
 {
-	int			arg1;
-	int			arg2;
-	int			arg3;
+	int64_t		ocp;
+	int64_t		arg1;
+	int64_t		arg2;
+	int64_t		arg3;
 }				t_arg;
 
 typedef struct	s_corewar
