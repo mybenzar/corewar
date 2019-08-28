@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 14:08:38 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/27 14:47:53 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/28 18:15:12 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int			reverse_order(void *champ_a, void *champ_b)
 {
-	return (((t_champion *)champ_a)->id > ((t_champion *)champ_b)->id);
+	return (((t_champion *)champ_a)->real_id > ((t_champion *)champ_b)->real_id);
 }
 
 t_list		*create_champion_node(t_corewar *corewar, char *name, int id)
@@ -33,7 +33,7 @@ t_list		*create_champion_node(t_corewar *corewar, char *name, int id)
 	else
 	{
 		champion.fd = fd;
-		champion.id = id;
+		champion.real_id = id;
 		champion.name = ft_strdup(name);
 		if (champion.name == NULL)
 			corewar->error |= MALLOC_ERR;
@@ -96,8 +96,8 @@ void	print_champion(t_list *list_champion)
 	while (list_champion != NULL)
 	{
 		champion = (t_champion *)list_champion->content;
-		ft_printf("#######\nname:\t%s\nid:\t%zu\nfd:\t%d\n#######\n",
-					champion->name, champion->id, champion->fd);
+		ft_printf("#######\nname:\t %s\nid:\t %zu\nreal_id: %zu\nfd:\t %d\n#######\n",
+					champion->name, champion->id, champion->real_id, champion->fd);
 		list_champion = list_champion->next;
 	}
 }
@@ -142,7 +142,6 @@ int		main(int ac, char **av)
 		///////// EXIT ROUTINE
 		return (EXIT_FAILURE);
 	}
-	print_champion(corewar.list_champion); // DEBUG
 	rewrite_champions_id(corewar.list_champion); // DEBUG
 	print_champion(corewar.list_champion); // DEBUG
 	return (EXIT_SUCCESS);

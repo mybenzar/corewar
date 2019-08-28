@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:05:04 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/27 14:41:36 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/28 18:11:51 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 typedef struct	s_champion
 {
 	char		*name;
+	size_t		real_id;
 	size_t		id;
 	int			fd;
 }				t_champion;
