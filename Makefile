@@ -6,7 +6,7 @@
 #    By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/27 09:14:51 by ffoissey          #+#    #+#              #
-#    Updated: 2019/08/27 10:20:45 by ffoissey         ###   ########.fr        #
+#    Updated: 2019/08/29 12:17:18 by ffoissey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,6 +122,8 @@ PATH_SRCS_ASM += srcs/asm/
 # ---------------------------------- corewar --------------------------------- #
 
 SRCS_COREWAR += main.c
+SRCS_COREWAR += init_champion.c
+SRCS_COREWAR += load_champion.c
 
 # ------------------------------------ asm ----------------------------------- #
 

@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:05:04 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/28 18:11:51 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/29 15:11:45 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define COREWAR_H
 
 # include "libft.h"
+# include "op.h"
 
 /*
 **** ERROR
@@ -26,9 +27,14 @@
 
 # define MALLOC_ERR				0x1000000000000000
 
+
+# define BUFFER_SIZE			4
+
 typedef struct	s_champion
 {
+	char		*bin_name;
 	char		*name;
+	uint8_t		*pc;
 	size_t		real_id;
 	size_t		id;
 	int			fd;
@@ -39,6 +45,11 @@ typedef struct	s_corewar
 	t_list		*list_champion;
 	uint64_t	nb_champion;
 	uint64_t	error;
+	uint8_t		map[MEM_SIZE];
 }				t_corewar;
+
+int8_t	init_champion(t_corewar *corewar, int ac, char **av);
+void	load_champion(t_corewar *corewar);
+void	print_champion(t_list *list_champion);
 
 #endif 
