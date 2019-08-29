@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:05:04 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/28 18:33:09 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/29 15:32:22 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ typedef struct	s_champion
 
 typedef struct	s_arg
 {
-	int64_t		ocp;
-	int64_t		arg1;
-	int64_t		arg2;
-	int64_t		arg3;
+	uint8_t		*ptr;
+	uint8_t		val;
+	enum e_type	type;
+	uint8_t		size;
 }				t_arg;
 
 typedef struct	s_corewar
@@ -49,8 +49,9 @@ typedef struct	s_corewar
 	uint64_t	error;
 	t_register	reg[REG_NUMBER];
 	uint8_t		carry;
+	uint8_t		map[MEM_SIZE];
+	t_arg		cur_arg[3];
 }				t_corewar;
-
 
 typedef	struct  s_register
 {

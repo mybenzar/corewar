@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_ld.c                                            :+:      :+:    :+:   */
+/*   op_add.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/28 17:37:59 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/29 15:27:42 by mybenzar         ###   ########.fr       */
+/*   Created: 2019/08/29 11:22:59 by mybenzar          #+#    #+#             */
+/*   Updated: 2019/08/29 15:27:03 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "corewar.h"
+#include "corewar.h"
 
 /*
-**	--> op_ld : load direct operation (0x02) - loads the first argument in the
-**	register (represented in the second argument). If the first argument is 0,
-**	carry takes the value of 1.
+**	--> op_add : arithmetical addition of the first two arguments, stocks the
+**	result in the third argument and if it is equal to 0, sets carry to 1.
 */
 
-// verifier que l'index de reg est le bon, les index envoyes commencent a 1
-// mais reg commence a 0
-// reg est en big endian
+//reverse result of addition in order to have it in big endian
 
-int8_t		op_ld(t_corewar *cor)
+int8_t	op_add(t_corewar *cor)
 {
-	cor->reg[cor->cur_arg[1]->val - 1] = cor->cur_arg[0];
-	if (cor->cur_arg[0] == 0)
+	cor->cur_arg[2]->(*ptr) = cor->cur_arg[0]->val + cor->cur_arg[1]->val;
+	if (cor->cur_arg[2] == 0)
 		cor->carry = 1;
 	return (SUCCESS);
 }

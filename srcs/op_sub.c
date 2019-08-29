@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_live.c                                          :+:      :+:    :+:   */
+/*   op_sub.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/27 17:44:28 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/29 14:25:16 by mybenzar         ###   ########.fr       */
+/*   Created: 2019/08/29 15:28:09 by mybenzar          #+#    #+#             */
+/*   Updated: 2019/08/29 15:32:22 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
-#include "ft_printf.h"
+#include "corewar"
 
 /*
-**	--> op_live : launches live operation (0x01) that holds on 4 bytes
-**	that represent the player's id
+**	--> op_sub : arithmetical substraction, substracts the second argument to
+**	the first and stocks it in the third argument. If the result is 0, carry
+**	is set to 1.
 */
 
-int8_t		op_live(t_corewar *cor)
+int8_t		op_sub(t_corewar *cor)
 {
-	ft_printf("Player %d is alive!\n", cor->cur_arg[0]->val);
-	return (SUCCESS);
+	
 }
