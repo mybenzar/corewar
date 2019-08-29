@@ -6,7 +6,7 @@
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 11:22:59 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/29 16:15:47 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/29 20:52:57 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,18 @@
 **	result in the third argument and if it is equal to 0, sets carry to 1.
 */
 
-int8_t	op_add(t_corewar *cor)
+int8_t	op_add(t_corewar *corewar, t_champion *champion)
 {
-	cor->cur_arg[2]->(*ptr) = cor->cur_arg[0]->(*ptr) + cor->cur_arg[1]->(*ptr);
-	if (cor->cur_arg[2]->(*ptr) == 0)
-		cor->carry = 1;
+	long long	arg1;
+	long long	arg2;
+	long long	arg3;
+
+	(void)champion;
+	arg1 = ef(corewar->arg[0].ptr, corewar->arg[0].size);
+	arg2 = ef(corewar->arg[1].ptr, corewar->arg[1].size);
+	arg3 = arg1 + arg2;
+	write_to_memory(corewar, arg3, 2);
+	if (arg3 == 0)
+		corewar->carry = 1;
 	return (SUCCESS);
 

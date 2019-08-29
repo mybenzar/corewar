@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_sub.c                                           :+:      :+:    :+:   */
+/*   op_live.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/29 15:28:09 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/29 16:47:14 by mybenzar         ###   ########.fr       */
+/*   Created: 2019/08/27 17:44:28 by mybenzar          #+#    #+#             */
+/*   Updated: 2019/08/29 20:09:07 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar"
+#include "corewar.h"
+#include "ft_printf.h"
 
 /*
-**	--> op_sub : arithmetical substraction, substracts the second argument to
-**	the first and stocks it in the third argument. If the result is 0, carry
-**	is set to 1.
+**	--> op_live : launches live operation (0x01) that holds on 4 bytes
+**	that represent the player's id
 */
 
-int8_t		op_sub(t_corewar *cor)
+int8_t		op_live(t_corewar *corewar, t_champion *champion)
 {
-	cor->cur_arg[2]->(*ptr) = cor->cur_arg[1]->(*ptr) - cor->cur_arg[0]->(*ptr);
-	if (cor->cur_arg[2]->(*ptr) == 0)
-		cor->carry = 1;
+	long long arg1;
+
+	arg1 = ef(corewar->arg[0].ptr, corewar->arg[0].size);
+	ft_printf("Player %lld is alive!\n", arg1);
 	return (SUCCESS);
 }

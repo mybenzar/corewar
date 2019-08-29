@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_power.c                                         :+:      :+:    :+:   */
+/*   write_to_memory.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/15 11:33:50 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/05/15 11:33:52 by mybenzar         ###   ########.fr       */
+/*   Created: 2019/08/29 20:35:25 by mybenzar          #+#    #+#             */
+/*   Updated: 2019/08/29 20:38:37 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "corewar.h"
 
-uintmax_t	ft_power(int n, int power)
+void	write_to_memory(t_corewar *corewar, long long res, int arg_id)
 {
-	int res;
+	int i;
 
-	res = 1;
-	if (power == 0)
-		return (1);
-	if (power < 0)
-		return (0);
-	while (power--)
-		res = res * n;
-	return (res);
+	i = 0;
+	while (i < corewar->arg[arg_id].size)
+	{
+		corewar->arg[arg_id].ptr[i] = (uint8_t)res;
+		res >>= 8;
+		i++;
+	}
 }

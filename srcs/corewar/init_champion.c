@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 10:45:12 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 14:33:10 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:01:54 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int8_t		get_champion(t_corewar *corewar, int ac, char **av)
 	int			i;
 
 	i = 0;
-	id_association = 0;
+	id_association = 1;
 	while (i < ac)
 	{
 		if (i + 1 != ac && is_n_option(av[i]), ft_str_is_numeric(av[i + 1]) == TRUE)
@@ -108,6 +108,5 @@ int8_t	init_champion(t_corewar *corewar, int ac, char **av)
 	if (get_champion(corewar, ac - 1, av + 1) == FAILURE)
 		return (FAILURE);
 	rewrite_champions_id(corewar->list_champion);
-	print_champion(corewar->list_champion); // DEBUG
 	return (SUCCESS);
 }

@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_and.c                                           :+:      :+:    :+:   */
+/*   op_or.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/29 16:33:28 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/29 16:47:14 by mybenzar         ###   ########.fr       */
+/*   Created: 2019/08/29 18:07:02 by mybenzar          #+#    #+#             */
+/*   Updated: 2019/08/29 20:52:47 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
 /*
-**	--> op_and : operates a logical and between the two first arguments and
+**	--> op_or : operates a bitwise OR between the two first arguments and
 **	stocks the result in the third argument. If the result is 0, carry is set
 **	to 0.
 */
 
-int8_t		op_and(t_corewar *cor)
+int8_t	op_or(t_corewar *corewar, t_champion *champion)
 {
-	cor->cur_arg[2]->(*ptr) = cor->cur_arg[1]->(*ptr) && cor->cur_arg[0]->(*ptr);
-	if (cor->cur_arg[2]->(*ptr) == 0)
-		cor->carry = 1;
+	long long	arg1;
+	long long	arg2;
+
+	(void)champion;
+	arg1 = ef(corewar->arg[0].ptr, corewar->arg[0].size);
+	arg2 = ef(corewar->arg[1].ptr, corewar->arg[1].size);
+	arg3 = arg1 | arg2;
+	write_to_memory(corewar, arg3, 2);
+	if (arg3 == 0)
+		corewar->carry = 1;
 	return (SUCCESS);
 }

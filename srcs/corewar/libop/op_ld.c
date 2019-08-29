@@ -6,7 +6,7 @@
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:37:59 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/29 15:27:42 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/29 20:53:10 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,16 @@
 // mais reg commence a 0
 // reg est en big endian
 
-int8_t		op_ld(t_corewar *cor)
+int8_t		op_ld(t_corewar *corewar, t_champion *champion)
 {
-	cor->reg[cor->cur_arg[1]->val - 1] = cor->cur_arg[0];
-	if (cor->cur_arg[0] == 0)
-		cor->carry = 1;
+	long long arg1;
+	long long arg2;
+
+	(void)champion;
+	arg1 = ef(corewar->arg[0].ptr, corewar->arg[0].size);
+	arg2 = ef(corewar->arg[1].ptr, corewar->arg[1].size);
+	corewar->reg[arg2 - 1] = arg1;
+	if (arg1 == 0)
+		corewar->carry = 1;
 	return (SUCCESS);
 }
