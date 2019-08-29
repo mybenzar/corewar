@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 14:08:38 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 15:17:37 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:01:14 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	print_champion(t_list *list_champion)
 	while (list_champion != NULL)
 	{
 		champion = (t_champion *)list_champion->content;
-		ft_printf("#######\nname:\t %s\nid:\t %zu\nreal_id: %zu\nfd:\t %d\n#######\n",
+		ft_printf("#######\nb_name:\t %s\nid:\t %zu\nreal_id: %zu\nfd:\t %d\n",
 					champion->bin_name, champion->id, champion->real_id, champion->fd);
+		ft_printf("name:\t %s\ncomment: %s\n#######\n", champion->name, champion->comment);
 		list_champion = list_champion->next;
 	}
 }
@@ -51,5 +52,6 @@ int		main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 	load_champion(&corewar);
+	print_champion(corewar.list_champion); // DEBUG
 	return (EXIT_SUCCESS);
 }

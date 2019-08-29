@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:05:04 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 15:11:45 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:00:11 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define TOO_MANY_CHAMPS_ERR	0x0000000000000004
 
 # define MALLOC_ERR				0x1000000000000000
+# define READ_ERR				0x2000000000000000
 
 
 # define BUFFER_SIZE			4
@@ -34,10 +35,12 @@ typedef struct	s_champion
 {
 	char		*bin_name;
 	char		*name;
+	char		*comment;
 	uint8_t		*pc;
 	size_t		real_id;
 	size_t		id;
 	int			fd;
+	uint32_t	prog_size;
 }				t_champion;
 
 typedef struct	s_corewar

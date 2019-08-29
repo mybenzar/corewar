@@ -6,16 +6,11 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 11:20:09 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 15:20:32 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:01:00 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-uint8_t	is_bin_file(uint32_t *header)
-{
-	return (*header == COREWAR_EXEC_MAGIC);
-}
 
 void	rev_bytes(char *byte, uint8_t size)
 {
@@ -33,14 +28,14 @@ void	rev_bytes(char *byte, uint8_t size)
 	}
 }
 
-uint8_t	is_zero_separator(t_champion *champion)
+uint8_t	is_zero_separator(t_corewar *corewar, t_champion *champion)
 {
 	char		buf[BUFFER_SIZE];
 	uint32_t	*zero;
 
 	if (read(champion->fd, buf, BUFFER_SIZE) == FAILURE)
 	{
-		//READ_ERROR
+		corewar->error |= READ_ERR;
 		return (FAILURE);
 	}
 	zero = (uint32_t *)buf;
@@ -49,45 +44,57 @@ uint8_t	is_zero_separator(t_champion *champion)
 	return (FALSE);
 }
 
-int8_t	get_champion_name(t_champion *champion)
+char	*get_champion_data(t_corewar *corewar, int fd, size_t size)
 {
-	char	buf[PROG_NAME_LENGTH];
+	char	*data;
 
-	if (read(champion->fd, buf, PROG_NAME_LENGTH) == FAILURE)
+	data = ft_memalloc(size + 1);
+	if (data == NULL)
 	{
-		//READ_ERROR
-		return (FAILURE);
+		corewar->error |= MALLOC_ERR;
+		return (NULL);
 	}
-	champion->name = ft_memalloc(PROG_NAME_LENGTH + 1);
-	if (champion->name == NULL)
+	if (read(fd, data, size) == FAILURE)
+		corewar->error |= READ_ERR;
+	return (data);
+}
+
+uint32_t read_bytes_word(t_corewar *corewar, int fd)
+{
+	char		buf[BUFFER_SIZE];
+	uint32_t	*word;
+
+	if (read(fd, buf, BUFFER_SIZE) == FAILURE)
 	{
-		//MALLOC_ERROR
-		return (FAILURE);
+		corewar->error |= READ_ERR;
+		return (0);
 	}
-	ft_strcpy(champion->name, buf);
-	return (SUCCESS);
+	rev_bytes(buf, BUFFER_SIZE);
+	word = (uint32_t *)buf;
+	return (*word);
 }
 
 int8_t	parser_champion(t_corewar *corewar, t_champion *champion)
 {
-	char	buf[BUFFER_SIZE];
+	uint32_t	magic;
 
 	(void)corewar;
-	if (read(champion->fd, buf, BUFFER_SIZE) == FAILURE)
-	{
-		//READ_ERROR
-		return (FAILURE);
-	}
-	rev_bytes(buf, BUFFER_SIZE);
-	if (is_bin_file((uint32_t *)buf) == FALSE)
+	magic = read_bytes_word(corewar, champion->fd); // MAGIC
+	// CHECK ERROR
+	if (magic != COREWAR_EXEC_MAGIC)
 	{
 		// ERROR NOT BINARY
 		return (FAILURE);
 	}
-	if (get_champion_name(champion) == FAILURE)
+	champion->name = get_champion_data(corewar, champion->fd, PROG_NAME_LENGTH); // NAME
+	if (champion->name == NULL)
 		return (FAILURE);
-	ft_printf("champion name: %s\n", champion->name);
-	if (is_zero_separator(champion) == FALSE)
+	if (is_zero_separator(corewar, champion) == FALSE) // ZERO SEP
+		return (FAILURE);
+	champion->prog_size = read_bytes_word(corewar, champion->fd); // PROG_SIZE
+	// CHECK ERROR
+	champion->comment = get_champion_data(corewar, champion->fd, COMMENT_LENGTH);
+	if (champion->comment == NULL)
 		return (FAILURE);
 	return (SUCCESS);
 }
