@@ -6,7 +6,7 @@
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 11:22:59 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/29 15:27:03 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:15:47 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@
 **	result in the third argument and if it is equal to 0, sets carry to 1.
 */
 
-//reverse result of addition in order to have it in big endian
-
 int8_t	op_add(t_corewar *cor)
 {
-	cor->cur_arg[2]->(*ptr) = cor->cur_arg[0]->val + cor->cur_arg[1]->val;
-	if (cor->cur_arg[2] == 0)
+	cor->cur_arg[2]->(*ptr) = cor->cur_arg[0]->(*ptr) + cor->cur_arg[1]->(*ptr);
+	if (cor->cur_arg[2]->(*ptr) == 0)
 		cor->carry = 1;
 	return (SUCCESS);
-}
+
