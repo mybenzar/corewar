@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:05:04 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 17:43:59 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/29 18:59:03 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,30 @@ typedef struct	s_champion
 	size_t		id;
 	int			fd;
 	uint32_t	prog_size;
-	uint32_t	tic;
+	uint32_t	cycle;
 }				t_champion;
+
+typedef struct	s_arg
+{
+	uint8_t		*ptr;
+	uint8_t		size;
+	// type
+}				t_arg;
 
 typedef struct	s_corewar
 {
+	uint32_t	total_cycles;
 	t_list		*list_champion;
 	uint64_t	nb_champion;
 	uint64_t	error;
+	t_arg		cur_arg[3];
 	uint8_t		map[MEM_SIZE];
 }				t_corewar;
+
 
 int8_t	init_champion(t_corewar *corewar, int ac, char **av);
 void	load_champion(t_corewar *corewar);
 void	print_champion(t_list *list_champion);
+int8_t	game_loop(t_corewar *corewar);
 
 #endif 

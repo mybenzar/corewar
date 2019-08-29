@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 17:11:41 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 17:44:02 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/29 18:59:12 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,41 @@ void	print_map(t_corewar *corewar)
 	}
 }
 
-enum e_poeration get_mem_data(t_champion *champion, t_arg *arg)
+enum e_operation get_mem_data(t_corewar *corewar, t_champion *champion)
 {
-	(void)arg;
-	(void)champion;
-	return (NONE);
+	enum	e_operation op;
+	t_arg	*arg;
+	uint8_t	ocp;
+	uint8_t	*pc;
+	uint8_t	i;
+	uint8_t	mask;
+
+	arg = corewar->cur_arg;
+	pc = champion->pc;
+	op = *pc;
+	pc++;
+	ocp = *pc;
+	i = 1;
+	while (i <= 3)
+	{
+		ocp = ocp >> 2;
+		mask = ocp & 0b00000011;
+		if (mask == 0b00000000)
+			arg[i].size = 0; 
+		else if (mask == 0b00000001)
+			arg[i].size = T_REG;
+		else if (mask == 0b00000010)
+			arg[i].size = T_DIR;
+		else
+			arg[i].size = T_IND;
+		arg[i].ptr = pc;
+		if (arg[i].size == 0)
+			arg[i].ptr = NULL;
+		pc += arg[i].size;
+		i++;
+	}
+	champion->pc = pc;
+	return (op);
 }
 
 int8_t	game_loop(t_corewar *corewar)
@@ -42,26 +72,27 @@ int8_t	game_loop(t_corewar *corewar)
 	enum e_operation	op;
 	t_champion			*champion;
 	t_list				*list;
-	t_args				cur_arg;
-	
 
 	op = NONE;
-	while (1) // LIVE
+	while (corewar->total_cycles < CYCLE_TO_DIE) // LIVE
 	{
-		list = corewar->ist_champion;
+		list = corewar->list_champion;
 		while (list != NULL)
 		{
-			champion = (champion *)list->content;
-			if (champion->tic == 0)
+			champion = (t_champion *)list->content;
+			if (champion->cycle == 0)
 			{
-				op = get_mem_data(champion, &cur_arg);
-				compute_op[op](&cur_arg);
+				//if (op != NONE)
+				//	compute_op[op](corewar, champion);
+				op = get_mem_data(corewar, champion);
+				return (FAILURE);
 			}
 			else
-				champion->tic--;
+				champion->cycle--;
+			corewar->total_cycles++;
 			list = list->next;
 		}
-		print_map(corewar);
+		//print_map(corewar);
 	}
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 11:20:09 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 16:34:21 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/29 18:42:57 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ int8_t	parser_champion(t_corewar *corewar, t_champion *champion)
 	// CHECK ERROR
 	champion->comment = get_champion_data(corewar, champion->fd, COMMENT_LENGTH);
 	if (champion->comment == NULL)
+		return (FAILURE);
+	if (is_zero_separator(corewar, champion) == FALSE) // ZERO SEP
 		return (FAILURE);
 	return (load_champion_prog(corewar, champion));
 }
