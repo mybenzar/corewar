@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 14:08:38 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 16:01:14 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:45:26 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	print_champion(t_list *list_champion)
 		champion = (t_champion *)list_champion->content;
 		ft_printf("#######\nb_name:\t %s\nid:\t %zu\nreal_id: %zu\nfd:\t %d\n",
 					champion->bin_name, champion->id, champion->real_id, champion->fd);
-		ft_printf("name:\t %s\ncomment: %s\n#######\n", champion->name, champion->comment);
+		ft_printf("p_size:\t %d\nname:\t %s\ncomment: %s\n#######\n",
+					champion->prog_size, champion->name, champion->comment);
 		list_champion = list_champion->next;
 	}
 }
@@ -39,6 +40,21 @@ void	error(uint64_t err)
 		ft_dprintf(2, "malloc\n");
 }
 
+#include "math.h"
+
+void	print_map(t_corewar *corewar)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		ft_printf("%.2x%c", corewar->map[i],
+				(i + 1 == MEM_SIZE || (i + 1) % (size_t)(sqrt(MEM_SIZE)) == 0) ? '\n' : ' ');
+		i++;
+	}
+}
+
 int		main(int ac, char **av)
 {
 	t_corewar	corewar;
@@ -53,5 +69,6 @@ int		main(int ac, char **av)
 	}
 	load_champion(&corewar);
 	print_champion(corewar.list_champion); // DEBUG
+	print_map(&corewar);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 11:20:09 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 16:01:00 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:34:21 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,24 @@ uint32_t read_bytes_word(t_corewar *corewar, int fd)
 	return (*word);
 }
 
+int8_t	load_champion_prog(t_corewar *corewar, t_champion *champion)
+{
+	(void)corewar;
+
+	if (champion->prog_size > CHAMP_MAX_SIZE)
+	{
+		ft_putendl("LOL");
+		/// ERR SIZE MAX CHAMPION
+		return (FAILURE);
+	}
+	if (read(champion->fd, champion->pc, champion->prog_size) == FAILURE)
+	{
+		corewar->error |= READ_ERR;
+		return (FAILURE);
+	}
+	return (SUCCESS);
+}
+
 int8_t	parser_champion(t_corewar *corewar, t_champion *champion)
 {
 	uint32_t	magic;
@@ -96,7 +114,7 @@ int8_t	parser_champion(t_corewar *corewar, t_champion *champion)
 	champion->comment = get_champion_data(corewar, champion->fd, COMMENT_LENGTH);
 	if (champion->comment == NULL)
 		return (FAILURE);
-	return (SUCCESS);
+	return (load_champion_prog(corewar, champion));
 }
 
 void	load_champion(t_corewar *corewar)
