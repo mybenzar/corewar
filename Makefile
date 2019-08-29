@@ -6,7 +6,7 @@
 #    By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/27 09:14:51 by ffoissey          #+#    #+#              #
-#    Updated: 2019/08/29 12:17:18 by ffoissey         ###   ########.fr        #
+#    Updated: 2019/08/29 17:36:34 by ffoissey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -195,7 +195,7 @@ $(DEBUG_COREWAR): $(DEBUG_PATH_OBJS_COREWAR) $(DEBUG_LIBFT) $(DEBUG_OBJS_COREWAR
 	$(CC) $(DBFLAGS) $(I_INCLUDES_COREWAR) $(DEBUG_OBJS_COREWAR) $(DEBUG_LIBFT) -o $@
 	printf "$(GREEN)$@ is ready.\n\n$(NC)"
 
-$(DEBUG_OBJS_COREWAR): $(DEBUG_PATH_OBJS_COREWAR)%.o: srcs/corewar/%.c $(HEADER_COREWAR) Makefile
+$(DEBUG_OBJS_COREWAR): $(DEBUG_PATH_OBJS_COREWAR)%.o: %.c $(HEADER_COREWAR) Makefile
 	$(CC) $(DBFLAGS) $(I_INCLUDES_COREWAR) -c $< -o $@
 	printf "$(ONELINE)$(PURPLE)Compiling for DEBUG $<"
 	printf "                                                            \n$(NC)"

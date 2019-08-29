@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:05:04 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 16:25:39 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/29 17:43:59 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,27 @@
 
 # define BUFFER_SIZE			4
 
+enum	e_operation
+{
+	NONE,
+	LIVE,
+	LD,
+	ST,
+	ADD,
+	SUB,
+	AND,
+	OR,
+	XOR,
+	ZJMP,
+	LDI,
+	STI,
+	FORK,
+	LLD,
+	LLDI,
+	LFORK,
+	AFF
+};
+
 typedef struct	s_champion
 {
 	char		*bin_name;
@@ -41,6 +62,7 @@ typedef struct	s_champion
 	size_t		id;
 	int			fd;
 	uint32_t	prog_size;
+	uint32_t	tic;
 }				t_champion;
 
 typedef struct	s_corewar

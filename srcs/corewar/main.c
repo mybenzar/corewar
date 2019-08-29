@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 14:08:38 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 17:05:52 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/29 17:36:37 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,6 @@ void	error(uint64_t err)
 		ft_dprintf(2, "malloc\n");
 }
 
-#include "math.h"
-
-void	print_map(t_corewar *corewar)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < MEM_SIZE)
-	{
-		ft_printf("\033[38;5;%dm%.2x\033[0m%c",
-				corewar->map[i] == 0 ? 255 : 256 - corewar->map[i], corewar->map[i],
-				(i + 1 == MEM_SIZE || (i + 1) % (size_t)(sqrt(MEM_SIZE)) == 0)
-				? '\n' : ' ');
-		i++;
-	}
-}
-
 int		main(int ac, char **av)
 {
 	t_corewar	corewar;
@@ -71,6 +54,6 @@ int		main(int ac, char **av)
 	}
 	load_champion(&corewar);
 	print_champion(corewar.list_champion); // DEBUG
-	print_map(&corewar);
+	game_loop(&corewar);
 	return (EXIT_SUCCESS);
 }
