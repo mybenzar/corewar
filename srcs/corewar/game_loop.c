@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 17:11:41 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 18:59:12 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/30 15:20:22 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,13 @@ enum e_operation get_mem_data(t_corewar *corewar, t_champion *champion)
 	enum	e_operation op;
 	t_arg	*arg;
 	uint8_t	ocp;
-	uint8_t	*pc;
 	uint8_t	i;
 	uint8_t	mask;
 
 	arg = corewar->cur_arg;
-	pc = champion->pc;
-	op = *pc;
-	pc++;
-	ocp = *pc;
+	op = *(champion->pc);
+	champion->pc_offset = 1;
+	ocp = *(champion->pc + champion->pc_offset);
 	i = 1;
 	while (i <= 3)
 	{
@@ -57,13 +55,12 @@ enum e_operation get_mem_data(t_corewar *corewar, t_champion *champion)
 			arg[i].size = T_DIR;
 		else
 			arg[i].size = T_IND;
-		arg[i].ptr = pc;
+		arg[i].ptr = champion->pc + champion->pc_offset;
 		if (arg[i].size == 0)
 			arg[i].ptr = NULL;
-		pc += arg[i].size;
+		champion->pc_offset += arg[i].size;
 		i++;
 	}
-	champion->pc = pc;
 	return (op);
 }
 
@@ -85,6 +82,7 @@ int8_t	game_loop(t_corewar *corewar)
 				//if (op != NONE)
 				//	compute_op[op](corewar, champion);
 				op = get_mem_data(corewar, champion);
+				print_map(corewar);
 				return (FAILURE);
 			}
 			else

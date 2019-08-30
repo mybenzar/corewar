@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:05:04 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 18:59:03 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/30 15:20:24 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct	s_champion
 	char		*name;
 	char		*comment;
 	uint8_t		*pc;
+	uint8_t		pc_offset;
 	size_t		real_id;
 	size_t		id;
 	int			fd;
@@ -69,7 +70,6 @@ typedef struct	s_arg
 {
 	uint8_t		*ptr;
 	uint8_t		size;
-	// type
 }				t_arg;
 
 typedef struct	s_corewar
