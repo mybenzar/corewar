@@ -24,7 +24,7 @@ int8_t	op_zjmp(t_corewar *corewar, t_champion *champion)
 	long long arg1;
 
 	(void)champion;
-	arg1 = ef(corewar->arg[0].ptr, corewar->arg[0].size);
+	arg1 = ef(corewar->cur_arg[0].ptr, corewar->cur_arg[0].size);
 	if (corewar->carry == 1)
 // WIP
 	return (SUCCESS);

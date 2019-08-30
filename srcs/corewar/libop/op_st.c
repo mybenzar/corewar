@@ -26,7 +26,7 @@ int8_t		op_st(t_corewar *corewar, t_champion *champion)
 	long long	arg2;
 
 	(void)champion;
-	arg1 = ef(corewar->arg[0].ptr, corewar->arg[0].size);
+	arg1 = ef(corewar->cur_arg[0].ptr, corewar->cur_arg[0].size);
 	arg2 = corewar->reg[arg1 - 1];
 	write_to_memory(corewar, arg2, 1);
 	if (arg1 == 0)

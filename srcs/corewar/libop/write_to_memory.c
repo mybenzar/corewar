@@ -17,9 +17,9 @@ void	write_to_memory(t_corewar *corewar, long long res, int arg_id)
 	int i;
 
 	i = 0;
-	while (i < corewar->arg[arg_id].size)
+	while (i < corewar->cur_arg[arg_id].size)
 	{
-		corewar->arg[arg_id].ptr[i] = (uint8_t)res;
+		corewar->cur_arg[arg_id].ptr[i] = (uint8_t)res;
 		res >>= 8;
 		i++;
 	}

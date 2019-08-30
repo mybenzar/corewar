@@ -24,7 +24,7 @@ int8_t		op_aff(t_corewar *corewar, t_champion *champion)
 {
 	long long	arg1;
 
-	arg1 = ef(corewar->arg[0].ptr, corewar->arg[0].size);
+	arg1 = ef(corewar->cur_arg[0].ptr, corewar->cur_arg[0].size);
 	ft_printf("%c", corewar->reg[arg1 - 1] % 256);
 	return (SUCCESS);
 }

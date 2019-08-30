@@ -27,8 +27,8 @@ int8_t		op_sub(t_corewar *corewar, t_champion *champion)
 
 	(void)champion;
 	i = 0;
-	arg1 = ef(corewar->arg[0].ptr, corewar->arg[0].size);
-	arg2 = ef(corewar->arg[1].ptr, corewar->arg[1].size);
+	arg1 = ef(corewar->cur_arg[0].ptr, corewar->cur_arg[0].size);
+	arg2 = ef(corewar->cur_arg[1].ptr, corewar->cur_arg[1].size);
 	arg3 = arg1 - arg2;
 	write_to_memory(corewar, arg3, 2);
 	if (arg3 == 0)

@@ -6,7 +6,7 @@
 #    By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/27 09:14:51 by ffoissey          #+#    #+#              #
-#    Updated: 2019/08/29 12:17:18 by ffoissey         ###   ########.fr        #
+#    Updated: 2019/08/30 16:37:12 by mybenzar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 ################################################################################
 
 # Name
-COREWAR = corewar 
+COREWAR = corewar
 DEBUG_COREWAR = corewar_db
 ASM = asm
 DEBUG_ASM = asm_db
@@ -111,6 +111,7 @@ HEADER_COREWAR += includes/asm/asm.h
 ################################################################################
 
 PATH_SRCS_COREWAR += srcs/corewar/
+PATH_SRCS_COREWAR += srcs/corewar/libop/
 PATH_SRCS_ASM += srcs/asm/
 
 ################################################################################
@@ -121,18 +122,30 @@ PATH_SRCS_ASM += srcs/asm/
 
 # ---------------------------------- corewar --------------------------------- #
 
-SRCS_COREWAR += main.c
+SRCS_COREWAR += main_corewar.c
 SRCS_COREWAR += init_champion.c
 SRCS_COREWAR += load_champion.c
+SRCS_COREWAR += game_loop.c
+
+# operation functions
+
+SRCS_COREWAR += op_live.c
+SRCS_COREWAR += op_add.c
+SRCS_COREWAR += op_sub.c
+SRCS_COREWAR += op_ld.c
+SRCS_COREWAR += op_ldi.c
+SRCS_COREWAR += op_st.c
+SRCS_COREWAR += op_sti.c
+SRCS_COREWAR += op_and.c
+SRCS_COREWAR += op_or.c
+SRCS_COREWAR += op_xor.c
+SRCS_COREWAR += op_zjmp.c
+SRCS_COREWAR += op_aff.c
+SRCS_COREWAR += write_to_memory.c
 
 # ------------------------------------ asm ----------------------------------- #
 
-SRCS_ASM += main.c
-
-################# ATTRIBUTION
-
-vpath srcs/corewar/%.c $(PATH_SRCS_COREWAR)
-vpath srcs/asm/%.c $(PATH_SRCS_ASM)
+SRCS_ASM += main_asm.c
 
 ################################################################################
 #################################               ################################
@@ -150,6 +163,12 @@ OBJS_ASM = $(patsubst %.c, $(PATH_OBJS_ASM)%.o, $(SRCS_ASM))
 DEBUG_PATH_OBJS_ASM = objs_debug/asm/
 DEBUG_OBJS_ASM = $(patsubst %.c, $(DEBUG_PATH_OBJS_ASM)%.o, $(SRCS_ASM))
 
+
+################# ATTRIBUTION
+
+vpath %.c $(PATH_SRCS_COREWAR)
+vpath %.c $(PATH_SRCS_ASM)
+
 ################################################################################
 #################################               ################################
 #################################     RULES     ################################
@@ -164,7 +183,7 @@ $(COREWAR): $(PATH_OBJS_COREWAR) $(LIBFT) $(OBJS_COREWAR)
 	$(CC) $(CFLAGS) $(I_INCLUDES_COREWAR) $(OBJS_COREWAR) $(LIBFT) -o $@
 	printf "$(GREEN)$@ is ready.\n\n$(NC)"
 
-$(OBJS_COREWAR): $(PATH_OBJS_COREWAR)%.o: srcs/corewar/%.c $(HEADER_COREWAR) Makefile
+$(OBJS_COREWAR): $(PATH_OBJS_COREWAR)%.o: %.c $(HEADER_COREWAR) Makefile
 	$(CC) $(CFLAGS) $(I_INCLUDES_COREWAR) -c $< -o $@
 	printf "$(ONELINE)$(CYAN)Compiling $<"
 	printf "                                                            \n$(NC)"
@@ -173,7 +192,7 @@ $(ASM): $(PATH_OBJS_ASM) $(LIBFT) $(OBJS_ASM)
 	$(CC) $(CFLAGS) $(I_INCLUDES_ASM) $(OBJS_ASM) $(LIBFT) -o $@
 	printf "$(GREEN)$@ is ready.\n\n$(NC)"
 
-$(OBJS_ASM): $(PATH_OBJS_ASM)%.o: srcs/asm/%.c $(HEADER_ASM) Makefile
+$(OBJS_ASM): $(PATH_OBJS_ASM)%.o: %.c $(HEADER_ASM) Makefile
 	$(CC) $(CFLAGS) $(I_INCLUDES_ASM) -c $< -o $@
 	printf "$(ONELINE)$(CYAN)Compiling $<"
 	printf "                                                            \n$(NC)"
@@ -184,7 +203,7 @@ $(PATH_OBJS_ASM):
 $(PATH_OBJS_COREWAR):
 	mkdir -p $@
 
-$(LIBFT): FORCE 
+$(LIBFT): FORCE
 	$(MAKE) -C $(PATH_LIBFT)
 
 #------------------------------------ DEBUG -----------------------------------#
@@ -195,7 +214,7 @@ $(DEBUG_COREWAR): $(DEBUG_PATH_OBJS_COREWAR) $(DEBUG_LIBFT) $(DEBUG_OBJS_COREWAR
 	$(CC) $(DBFLAGS) $(I_INCLUDES_COREWAR) $(DEBUG_OBJS_COREWAR) $(DEBUG_LIBFT) -o $@
 	printf "$(GREEN)$@ is ready.\n\n$(NC)"
 
-$(DEBUG_OBJS_COREWAR): $(DEBUG_PATH_OBJS_COREWAR)%.o: srcs/corewar/%.c $(HEADER_COREWAR) Makefile
+$(DEBUG_OBJS_COREWAR): $(DEBUG_PATH_OBJS_COREWAR)%.o: %.c $(HEADER_COREWAR) Makefile
 	$(CC) $(DBFLAGS) $(I_INCLUDES_COREWAR) -c $< -o $@
 	printf "$(ONELINE)$(PURPLE)Compiling for DEBUG $<"
 	printf "                                                            \n$(NC)"
@@ -204,7 +223,7 @@ $(DEBUG_ASM): $(DEBUG_PATH_OBJS_ASM) $(DEBUG_LIBFT) $(DEBUG_OBJS_ASM)
 	$(CC) $(DBFLAGS) $(I_INCLUDES_ASM) $(DEBUG_OBJS_ASM) $(DEBUG_LIBFT) -o $@
 	printf "$(GREEN)$@ is ready.\n\n$(NC)"
 
-$(DEBUG_OBJS_ASM): $(DEBUG_PATH_OBJS_ASM)%.o: srcs/asm/%.c $(HEADER_ASM) Makefile
+$(DEBUG_OBJS_ASM): $(DEBUG_PATH_OBJS_ASM)%.o: %.c $(HEADER_ASM) Makefile
 	$(CC) $(DBFLAGS) $(I_INCLUDES_ASM) -c $< -o $@
 	printf "$(ONELINE)$(PURPLE)Compiling for DEBUG $<"
 	printf "                                                            \n$(NC)"
@@ -215,7 +234,7 @@ $(DEBUG_PATH_OBJS_ASM):
 $(DEBUG_PATH_OBJS_COREWAR):
 	mkdir -p $@
 
-$(DEBUG_LIBFT): FORCE 
+$(DEBUG_LIBFT): FORCE
 	$(MAKE) -C $(PATH_LIBFT) debug
 
 #--------------------------------- Basic Rules --------------------------------#
@@ -250,4 +269,4 @@ FORCE:
 #----------------------------------- Special ----------------------------------#
 
 .PHONY: clean fclean re all debug
-.SILENT:
+#.SILENT:
