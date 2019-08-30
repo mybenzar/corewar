@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:05:04 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/29 21:12:34 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/30 15:08:44 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ int8_t	op_and(t_corewar *corewar, t_champion *champion);
 int8_t	op_or(t_corewar *corewar, t_champion *champion);
 int8_t	op_xor(t_corewar *corewar, t_champion *champion);
 int8_t	op_zjmp(t_corewar *corewar, t_champion *champion);
+int8_t	op_aff(t_corewar *corewar, t_champion *champion);
 
 #endif

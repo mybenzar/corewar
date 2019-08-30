@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_st.c                                            :+:      :+:    :+:   */
+/*   op_aff.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/29 16:17:24 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/30 11:46:16 by mybenzar         ###   ########.fr       */
+/*   Created: 2019/08/30 11:44:53 by mybenzar          #+#    #+#             */
+/*   Updated: 2019/08/30 15:08:43 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar"
+# include "corewar.h"
 
 /*
-**	--> op_st : store direct - directly transfers register value (stocked in
-**	first argument) in the second argument. If the first argument equals 0,
-**	carry is set to 1.
+**	--> op_aff : only has one argument which represents the register. Displays
+**	the ascii character in base 10 corresponding to what the register contains.
 */
 
-// modifier si jamais index ou registre
+// modulo 256 applique ?
+// faut-il convertir le code en decimal ?
 
-int8_t		op_st(t_corewar *corewar, t_champion *champion)
+int8_t		op_aff(t_corewar *corewar, t_champion *champion)
 {
 	long long	arg1;
-	long long	arg2;
 
-	(void)champion;
 	arg1 = ef(corewar->arg[0].ptr, corewar->arg[0].size);
-	arg2 = corewar->reg[arg1 - 1];
-	write_to_memory(corewar, arg2, 1);
-	if (arg1 == 0)
-		corewar->carry = 1;
+	ft_printf("%c", corewar->reg[arg1 - 1] % 256);
 	return (SUCCESS);
 }
