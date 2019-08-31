@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:05:04 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/30 16:17:15 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/31 15:51:59 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 # define READ_ERR				0x2000000000000000
 
 # define BUFFER_SIZE			4
+# define INIT_ORIGIN			2
+# define IDX_ON					1
+# define IDX_OFF				0
 
 enum	e_operation
 {
@@ -89,27 +92,29 @@ typedef struct	s_corewar
 }				t_corewar;
 
 
-int8_t	init_champion(t_corewar *corewar, int ac, char **av);
-void	load_champion(t_corewar *corewar);
-void	print_champion(t_list *list_champion);
-int8_t	game_loop(t_corewar *corewar);
+int8_t		init_champion(t_corewar *corewar, int ac, char **av);
+void		load_champion(t_corewar *corewar);
+void		print_champion(t_list *list_champion);
+uint8_t		*get_addr(uint8_t *ptr, uint64_t offset, uint8_t mod);
+int8_t		game_loop(t_corewar *corewar);
+long long	read_arg(uint8_t *ptr, uint8_t size);
 
 /*
 **** OPERATION FUNCTIONS
 */
 
-void	write_to_memory(t_corewar *corewar, long long res, int arg_id);
-int8_t	op_live(t_corewar *corewar, t_champion *champion);
-int8_t	op_add(t_corewar *corewar, t_champion *champion);
-int8_t	op_sub(t_corewar *corewar, t_champion *champion);
-int8_t	op_ld(t_corewar *corewar, t_champion *champion);
-int8_t	op_ldi(t_corewar *corewar, t_champion *champion);
-int8_t	op_st(t_corewar *corewar, t_champion *champion);
-int8_t	op_sti(t_corewar *corewar, t_champion *champion);
-int8_t	op_and(t_corewar *corewar, t_champion *champion);
-int8_t	op_or(t_corewar *corewar, t_champion *champion);
-int8_t	op_xor(t_corewar *corewar, t_champion *champion);
-int8_t	op_zjmp(t_corewar *corewar, t_champion *champion);
-int8_t	op_aff(t_corewar *corewar, t_champion *champion);
+void		write_to_memory(t_corewar *corewar, long long res, int arg_id);
+int8_t		op_live(t_corewar *corewar, t_champion *champion);
+int8_t		op_add(t_corewar *corewar, t_champion *champion);
+int8_t		op_sub(t_corewar *corewar, t_champion *champion);
+int8_t		op_ld(t_corewar *corewar, t_champion *champion);
+int8_t		op_ldi(t_corewar *corewar, t_champion *champion);
+int8_t		op_st(t_corewar *corewar, t_champion *champion);
+int8_t		op_sti(t_corewar *corewar, t_champion *champion);
+int8_t		op_and(t_corewar *corewar, t_champion *champion);
+int8_t		op_or(t_corewar *corewar, t_champion *champion);
+int8_t		op_xor(t_corewar *corewar, t_champion *champion);
+int8_t		op_zjmp(t_corewar *corewar, t_champion *champion);
+int8_t		op_aff(t_corewar *corewar, t_champion *champion);
 
 #endif

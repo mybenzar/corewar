@@ -6,11 +6,27 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 14:08:38 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/30 16:12:40 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/31 14:46:13 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+//get_addr(cur_ptr, arg_value, INIT_ORIGIN | IDX_OFF)
+
+uint8_t		*get_addr(uint8_t *ptr, uint64_t offset, uint8_t opt)
+{
+	static uint8_t	*origin = NULL;
+
+	if (opt & INIT_ORIGIN)
+	{
+		origin = ptr;
+		return (NULL);
+	}
+	if (opt & IDX_ON)
+		return ((ptr + (offset % IDX_MOD) - origin) % MEM_SIZE);
+	return ((ptr + offset - origin) % MEM_SIZE);
+}
 
 void	print_champion(t_list *list_champion)
 {
@@ -54,6 +70,7 @@ int		main(int ac, char **av)
 	}
 	load_champion(&corewar);
 	print_champion(corewar.list_champion); // DEBUG
+	get_addr(NULL, 0, corewar.map);
 	game_loop(&corewar);
 	return (EXIT_SUCCESS);
 }

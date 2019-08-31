@@ -6,7 +6,7 @@
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 20:51:32 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/29 20:58:39 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/31 15:24:51 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int8_t	op_zjmp(t_corewar *corewar, t_champion *champion)
 	long long arg1;
 
 	(void)champion;
-	arg1 = ef(corewar->cur_arg[0].ptr, corewar->cur_arg[0].size);
+	arg1 = read_arg(corewar->cur_arg[0].ptr, corewar->cur_arg[0].size);
 	if (corewar->carry == 1)
 // WIP
 	return (SUCCESS);

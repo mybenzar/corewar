@@ -6,7 +6,7 @@
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 11:44:53 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/30 15:08:43 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/31 15:29:25 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int8_t		op_aff(t_corewar *corewar, t_champion *champion)
 {
 	long long	arg1;
 
-	arg1 = ef(corewar->cur_arg[0].ptr, corewar->cur_arg[0].size);
+	arg1 = read_arg(corewar->cur_arg[0].ptr, corewar->cur_arg[0].size);
 	ft_printf("%c", corewar->reg[arg1 - 1] % 256);
 	return (SUCCESS);
 }

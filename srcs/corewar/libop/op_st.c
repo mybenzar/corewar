@@ -6,7 +6,7 @@
 /*   By: mybenzar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 16:17:24 by mybenzar          #+#    #+#             */
-/*   Updated: 2019/08/30 11:46:16 by mybenzar         ###   ########.fr       */
+/*   Updated: 2019/08/31 15:24:05 by mybenzar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int8_t		op_st(t_corewar *corewar, t_champion *champion)
 	long long	arg2;
 
 	(void)champion;
-	arg1 = ef(corewar->cur_arg[0].ptr, corewar->cur_arg[0].size);
+	arg1 = read_arg(corewar->cur_arg[0].ptr, corewar->cur_arg[0].size);
 	arg2 = corewar->reg[arg1 - 1];
 	write_to_memory(corewar, arg2, 1);
 	if (arg1 == 0)
