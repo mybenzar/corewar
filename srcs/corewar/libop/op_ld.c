@@ -28,10 +28,13 @@ int8_t		op_ld(t_corewar *corewar, t_champion *champion)
 	long long arg2;
 
 	(void)champion;
-	arg1 = read_arg(corewar->cur_arg[0].ptr, corewar->cur_arg[0].size);
-	arg2 = read_arg(corewar->cur_arg[1].ptr, corewar->cur_arg[1].size);
-	corewar->reg[arg2 - 1] = arg1;
+	if (corewar->cur_arg[0].size & T_DIR)
+		arg1 = read_arg(corewar->cur_arg[0].ptr, corewar->cur_arg[0].size);
+	if (corewar->cur_arg[0].size & T_IND)
+		arg1 = map[arg1];
 	if (arg1 == 0)
 		corewar->carry = 1;
+	arg2 = read_arg(corewar->cur_arg[1].ptr, corewar->cur_arg[1].size);
+	corewar->reg[arg2 - 1] = arg1;
 	return (SUCCESS);
 }

@@ -18,8 +18,6 @@
 **	carry is set to 1.
 */
 
-// modifier si jamais index ou registre
-
 int8_t		op_st(t_corewar *corewar, t_champion *champion)
 {
 	long long	arg1;
@@ -27,8 +25,11 @@ int8_t		op_st(t_corewar *corewar, t_champion *champion)
 
 	(void)champion;
 	arg1 = read_arg(corewar->cur_arg[0].ptr, corewar->cur_arg[0].size);
-	arg2 = corewar->reg[arg1 - 1];
-	write_to_memory(corewar, arg2, 1);
+	arg2 = read_arg(corewar->cur_arg[1].ptr, corewar->cur_arg[1].size);
+	if (corewar->cur_arg[1].size & T_REG)
+		corewar->reg[arg2 - 1] = corewar->reg[arg1 - 1];
+	if (corewar->cur_arg[1].size & T_IND)
+		corewar->map[*get_addr(pc, arg2, IDX_ON)] = corewar->reg[arg1 - 1];
 	if (arg1 == 0)
 		corewar->carry = 1;
 	return (SUCCESS);

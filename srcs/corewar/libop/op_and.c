@@ -30,9 +30,13 @@ int8_t		op_and(t_corewar *corewar, t_champion *champion)
 	if (corewar->cur_arg[0].size & T_IND)
 		arg1 = corewar->reg[arg1 - 1];
 	arg2 = read_arg(corewar->cur_arg[1].ptr, corewar->cur_arg[1].size);
-	arg3 = arg1 & arg2;
-	write_to_memory(corewar, arg3, 2);
-	if (arg3 == 0)
+	if (corewar->cur_arg[1].size & T_REG)
+		arg2 = corewar->reg[arg2 - 1];
+	if (corewar->cur_arg[1].size & T_IND)
+		arg2 = corewar->reg[arg2 - 1];
+	arg3 = read_arg(corewar->cur_arg[2].ptr, corewar->cur_arg[2].size);
+	if (arg1 & arg2 == 0)
 		corewar->carry = 1;
+	corewar->reg[arg3 - 1] = arg1 & arg2;
 	return (SUCCESS);
 }

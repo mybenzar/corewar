@@ -17,9 +17,6 @@
 **	the ascii character in base 10 corresponding to what the register contains.
 */
 
-// modulo 256 applique ?
-// faut-il convertir le code en decimal ?
-
 int8_t		op_aff(t_corewar *corewar, t_champion *champion)
 {
 	long long	arg1;
